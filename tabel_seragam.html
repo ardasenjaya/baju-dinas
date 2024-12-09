@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabel Seragam</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #000;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        td {
+            vertical-align: middle;
+        }
+        h2 {
+            text-align: center;
+        }
+        .highlight {
+            font-weight: bold;
+            font-size: 2em;
+            text-align: center;
+            color: #0531f8;
+            -webkit-animation: vibrate-1 0.3s linear infinite both;
+	        animation: vibrate-1 0.3s linear infinite both;
+        }
+        @-webkit-keyframes vibrate-1 {
+            0% {
+              -webkit-transform: translate(0);
+                      transform: translate(0);
+            }
+            20% {
+              -webkit-transform: translate(-2px, 2px);
+                      transform: translate(-2px, 2px);
+            }
+            40% {
+              -webkit-transform: translate(-2px, -2px);
+                      transform: translate(-2px, -2px);
+            }
+            60% {
+              -webkit-transform: translate(2px, 2px);
+                      transform: translate(2px, 2px);
+            }
+            80% {
+              -webkit-transform: translate(2px, -2px);
+                      transform: translate(2px, -2px);
+            }
+            100% {
+              -webkit-transform: translate(0);
+                      transform: translate(0);
+            }
+          }
+          @keyframes vibrate-1 {
+            0% {
+              -webkit-transform: translate(0);
+                      transform: translate(0);
+            }
+            20% {
+              -webkit-transform: translate(-2px, 2px);
+                      transform: translate(-2px, 2px);
+            }
+            40% {
+              -webkit-transform: translate(-2px, -2px);
+                      transform: translate(-2px, -2px);
+            }
+            60% {
+              -webkit-transform: translate(2px, 2px);
+                      transform: translate(2px, 2px);
+            }
+            80% {
+              -webkit-transform: translate(2px, -2px);
+                      transform: translate(2px, -2px);
+            }
+            100% {
+              -webkit-transform: translate(0);
+                      transform: translate(0);
+            }
+          }
+    </style>
+</head>
+<body>
+    <h2>Jadwal Seragam  Dinas Puskesmas Sirampog</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Hari</th>
+                <th>ASN</th>
+                <th>Non ASN</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Senin</td>
+                <td>Seragam PDH Khaki</td>
+                <td>Kemeja PDH Putih</td>
+            </tr>
+            <tr>
+                <td>Selasa</td>
+                <td>Seragam PDH Khaki</td>
+                <td>Kemeja PDH Putih</td>
+            </tr>
+            <tr>
+                <td>Rabu</td>
+                <td>Kemeja PDH Putih</td>
+                <td>Kemeja PDH Putih</td>
+            </tr>
+            <tr>
+                <td>Kamis</td>
+                <td>Batik Ukel</td>
+                <td>Batik Ukel</td>
+            </tr>
+            <tr>
+                <td>Jumat</td>
+                <td>Lurik</td>
+                <td>Lurik</td>
+            </tr>
+            <tr>
+                <td>Sabtu</td>
+                <td>Batik Coklat</td>
+                <td>Batik Coklat</td>
+            </tr>
+            <tr>
+                <td>Tanggal 17</td>
+                <td>Seragam KORPRI</td>
+                <td>Menyesuaikan hari</td>
+            </tr>
+            <tr>
+                <td>Tanggal 18</td>
+                <td>Seragam Brebesan</td>
+                <td>Seragam Brebesan</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        // Mendapatkan nama hari hari ini
+        const hariIni = new Date().toLocaleString('id-ID', { weekday: 'long' });
+        // Mendapatkan tanggal hari ini
+        const tanggalIni = new Date().getDate();
+
+        // Menyoroti nama hari yang sesuai
+        const cells = document.querySelectorAll('td:first-child'); // Memilih semua kolom hari
+        cells.forEach(cell => {
+            // Highlight hari ini jika sesuai
+            const row = cell.parentElement;
+            if (cell.textContent === hariIni && tanggalIni != 17 && tanggalIni != 18) {
+                row.querySelectorAll('td').forEach(td => {
+                    td.classList.add('highlight');
+                });
+            }
+
+            // Menyoroti baris jika tanggal adalah 17 atau 18
+            if (cell.textContent === "Tanggal 17") {
+                const row = cell.parentElement; // Menyasar seluruh baris
+                if (tanggalIni === 17 && hariIni !="Minggu") {
+                    row.querySelectorAll('td').forEach(td => {
+                        td.classList.add('highlight');
+                    });
+                }
+            }
+
+            if (cell.textContent === hariIni) {
+                // Menyasar seluruh baris
+                if (tanggalIni === 17 && hariIni !="Minggu") {
+                    const nonAsnCell = row.querySelectorAll('td')[2]; // Kolom Non ASN
+                nonAsnCell.classList.add('highlight');
+                    };
+                
+            }
+
+            if (cell.textContent === "Tanggal 18") {
+                const row = cell.parentElement; // Menyasar seluruh baris
+                if (tanggalIni === 18 && hariIni !="Minggu") {
+                    row.querySelectorAll('td').forEach(td => {
+                        td.classList.add('highlight');
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
