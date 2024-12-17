@@ -24,7 +24,7 @@
         td {
             vertical-align: middle;
         }
-        h2 {
+        h2, h3 {
             text-align: center;
         }
         .highlight {
@@ -91,6 +91,7 @@
 </head>
 <body>
     <h2>Jadwal Seragam  Dinas Puskesmas Sirampog</h2>
+	<h3><div id="clock"></div></h3>
     <table>
         <thead>
             <tr>
@@ -188,6 +189,40 @@
                 }
             }
         });
+
+	    // Fungsi untuk mendapatkan nama hari dan bulan dalam format Indonesia
+    function formatDateTime() {
+        const now = new Date();
+
+        const hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        const bulan = [
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ];
+
+        const namaHari = hari[now.getDay()];
+        const tanggal = String(now.getDate()).padStart(2, '0');
+        const namaBulan = bulan[now.getMonth()];
+        const tahun = now.getFullYear();
+
+        const jam = String(now.getHours()).padStart(2, '0');
+        const menit = String(now.getMinutes()).padStart(2, '0');
+        const detik = String(now.getSeconds()).padStart(2, '0');
+
+        return `${namaHari}, ${tanggal} ${namaBulan} ${tahun}<br>${jam}:${menit}:${detik}`;
+    }
+
+    // Fungsi untuk memperbarui elemen div dengan waktu saat ini
+    function updateClock() {
+        const clockDiv = document.getElementById('clock');
+        clockDiv.innerHTML = formatDateTime();
+    }
+
+    // Memperbarui jam setiap detik
+    setInterval(updateClock, 1000);
+
+    // Menampilkan waktu saat pertama kali halaman dimuat
+    updateClock();
     </script>
 </body>
 </html>
